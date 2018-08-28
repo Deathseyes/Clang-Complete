@@ -171,6 +171,11 @@ class Complete(object):
 
     for v in include_opts:
       opt.append(v)
+
+    project_folders = window.folders()
+    for folder in project_folders:
+      opt.append('-I' + folder)
+
     print("clang options: ", opt)
     return opt
 
