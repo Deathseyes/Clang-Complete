@@ -46,7 +46,7 @@ linux_config:
 	sudo ln -sf /usr/lib/llvm-3.5/lib/libclang-3.5.so.1 ./lib/libclang.so
 
 cc_lib: $(FILES)
-	$(CC) -shared -o $(LIBCC)  $(CFLAGS) $^ -L$(CLANG) $(LIB_FLAG) -I$(CLANG)/include  -lclang
+	$(CC) -m64  -shared -o $(LIBCC)  $(CFLAGS) $^ -L$(CLANG) $(LIB_FLAG) -I$(CLANG)/include  -lclang
 
 link:
 	ln -s $(PWD) $(ST3)
