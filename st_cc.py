@@ -158,7 +158,9 @@ class Complete(object):
     additional_lang_opts = settings.get("additional_language_options", {})
     language = get_language(view)
     project_settings = view.settings()
-    include_opts = settings.get("include_options", []) + project_settings.get("cc_include_options", [])
+    include_opts = settings.get("include_options", [])
+    project_include_opts = project_settings.get("cc_include_options", {}).get("I", [])
+    project_def_opts = project_settings.get("cc_include_options", {}).get("D", [])
 
     window = sublime.active_window()
     variables = window.extract_variables()
@@ -171,6 +173,12 @@ class Complete(object):
 
     for v in include_opts:
       opt.append(v)
+
+    for v in project_include_opts:
+      opt.append('-I'+Complete.expand_path(view, v))
+
+    for v in project_def_opts:
+      opt.append('-D'+v)
 
     project_folders = window.folders()
     for folder in project_folders:
@@ -217,6 +225,23 @@ class Complete(object):
     caret= view.sel()[0].begin()
     line = view.substr(sublime.Region(view.line(caret).a, caret))
     return Complete.member_regex.search(line) != None
+
+  @staticmethod
+  def expand_path(view, path):
+
+    if os.path.isabs(path):
+      return path
+
+    folders = view.window().folders()
+    if folders is None:
+      return path
+
+    folder = folders[0]
+    abspath = os.path.abspath(os.path.join(folder, path))
+    if not os.path.isdir(abspath):
+      return path
+
+    return abspath
 
 
 class ClangClean(sublime_plugin.TextCommand):
