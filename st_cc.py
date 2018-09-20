@@ -268,6 +268,11 @@ class CCAutoComplete(sublime_plugin.EventListener):
 
 
   def on_post_save_async(self, view):
+    # clean the symbol cache when project settings changed
+    fileExtension = os.path.splitext(view.file_name())[1].lower()
+    if ".sublime-project" == fileExtension:
+      Complete.clean()
+
     if not can_complete(view):
       return 
 
