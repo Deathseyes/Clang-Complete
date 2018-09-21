@@ -46,12 +46,20 @@ Alternatively, header files can also be included from the Sublime Text 3 `<name>
 "settings":
 {
     "cc_include_options":
-    [
-        "-I/headfile_path1",
-        "-I/headfile_path2",
-        "-I/headfile_path3"
-        // ...
-    ]
+    {
+        "I":
+        [
+            "headfile_path1",
+            "headfile_path2",
+            "headfile_path3"
+            // ...
+        ],
+        "D":
+        [
+            "MACRO=VALUE",
+            // ...
+        ]
+    }
      // ...
 }
 ~~~~
@@ -63,14 +71,20 @@ Example settings for Windows:
     "settings":
     {
         "cc_include_options":
-        [
-            "-isystem", "C:\\MinGW\\i686-w64-mingw32\\include",
-            "-isystem", "C:\\MinGW\\i686-w64-mingw32\\include\\c++",
-            "-isystem", "C:\\MinGW\\i686-w64-mingw32\\include\\c++\\tr1",
-            "-isystem", "C:\\MinGW\\i686-w64-mingw32\\include\\c++\\i686-w64-mingw32",
-            "-isystem", "C:\\LLVM\\lib\\clang\\3.6.1\\include",
-            "-DBOOST_USE_WINDOWS_H"
-        ]
+        {
+            "I":
+            [
+                "C:\\MinGW\\i686-w64-mingw32\\include",
+                "C:\\MinGW\\i686-w64-mingw32\\include\\c++",
+                "C:\\MinGW\\i686-w64-mingw32\\include\\c++\\tr1",
+                "C:\\MinGW\\i686-w64-mingw32\\include\\c++\\i686-w64-mingw32",
+                "C:\\LLVM\\lib\\clang\\3.6.1\\include",
+            ],
+            "D":
+            [
+                "BOOST_USE_WINDOWS_H",
+            ]
+        }
     }
 ~~~~
 
