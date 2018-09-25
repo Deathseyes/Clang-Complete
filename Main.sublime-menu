@@ -16,6 +16,14 @@
                         "children":
                         [
                             {
+                                "caption": "Readme",
+                                "command": "open_file",
+                                "args":
+                                {
+                                    "file": "${packages}/Clang-Complete/README.md"
+                                }
+                            },
+                            {
                                 "caption": "Settings",
                                 "command": "edit_settings", 
                                 "args":
@@ -23,7 +31,7 @@
                                     "base_file": "${packages}/Clang-Complete/cc.sublime-settings",
                                     "default": "{\n\t$0\n}\n" 
                                 },
-                            }
+                            },
                         ]
                     }
                 ]
