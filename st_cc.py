@@ -236,12 +236,12 @@ class Complete(object):
     if folders is None:
       return path
 
-    folder = folders[0]
-    abspath = os.path.abspath(os.path.join(folder, path))
-    if not os.path.isdir(abspath):
-      return path
+    for folder in folders:
+        abspath = os.path.abspath(os.path.join(folder, path))
+        if os.path.isdir(abspath):
+            return abspath
 
-    return abspath
+    return path
 
 
 class ClangClean(sublime_plugin.TextCommand):
